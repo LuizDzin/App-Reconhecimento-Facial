@@ -1,6 +1,6 @@
 Webcam.set({
     width:350,
-    height:350,
+    height:300,
     image_format:'png',
     png_quality:10
 });
@@ -9,9 +9,9 @@ Webcam.attach('#camera');
 
 function takeSnapshot() {
     Webcam.snap(function(data_uri) {
-        document.getElementById("result").innerHTML = '<img id="imagemCapturada" src="'+data_uri+'"/>';
-    });
-    }
+    document.getElementById("result").innerHTML = '<img id="captured_image" src="'+data_uri+'"/>';
+});
+}
 
 console.log('versão ml5:', ml5.version);
 
@@ -22,7 +22,7 @@ function modelLoaded() {
 }
 
 function check() {
-    ImagemCapturada = document.getElementById("imagemCapturada");
+    captura = document.getElementById("captured_image");
     filtroImagens.classify(captura, gotResult);
 }
 
@@ -33,6 +33,6 @@ function gotResult(error, results) {
     else {
     console.log(results);
     document.getElementById("nomeObjeto").innerHTML = results[0].label;
-    document.getElementById("nomeObjeto").innerHTML = results[0].confidence.toFixed(2);
+    document.getElementById("Precisao").innerHTML = results[0].confidence.toFixed(2);
     }
     }
